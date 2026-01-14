@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>[ПРИДУМАЙТЕ НАЗВАНИЕ]</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div id="auth-screen" class="screen active">
+            <div class="auth-container">
+                <h1 class="casino-title">🎲 [ПРИДУМАЙТЕ НАЗВАНИЕ]</h1>
+                <div class="auth-tabs">
+                    <button class="tab-btn active" onclick="showLogin()">
+                        Вход
+                    </button>
+                    <button class="tab-btn" onclick="showSignup()">
+                        Регистрация
+                    </button>
+                </div>
+
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <label>Имя пользователя</label>
+                        <input type="text" placeholder="Введите имя" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input
+                            type="password"
+                            placeholder="Введите пароль"
+                            required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                </form>
+
+                <form id="signup-form" class="auth-form">
+                    <div class="form-group">
+                        <label>Имя пользователя</label>
+                        <input
+                            type="text"
+                            placeholder="Придумайте имя"
+                            required />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            placeholder="Введите email"
+                            required />
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input
+                            type="password"
+                            placeholder="Придумайте пароль"
+                            required />
+                    </div>
+                    <div class="form-group">
+                        <label>Подтвердите пароль</label>
+                        <input
+                            type="password"
+                            placeholder="Повторите пароль"
+                            required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Создать аккаунт
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div class="game-container">
+                <header class="game-header">
+                    <div class="user-info">
+                        <span class="username">Студент123</span>
+                        <span class="balance">📊 [БАЛЛЫ] баллов</span>
+                    </div>
+                    <nav class="game-nav">
+                        <button class="nav-btn" onclick="showLeaderboard()">
+                            🏆 Рейтинг
+                        </button>
+                        <button class="nav-btn" onclick="logout()">
+                            Выход
+                        </button>
+                    </nav>
+                </header>
+
+                <div class="slot-machine">
+                    <div class="slot-machine-header">
+                        <h2>🎲 [ПРИДУМАЙТЕ НАЗВАНИЕ ИГРЫ] 🎲</h2>
+                    </div>
+
+                    <div class="slots-container">
+                        <div class="slot-wrapper">
+                            <div class="slot" id="slot1">
+                                <div class="reel">
+                                    <div class="symbol">📚</div>
+                                    <div class="symbol">✏️</div>
+                                    <div class="symbol">🧠</div>
+                                    <div class="symbol">🎓</div>
+                                    <div class="symbol">🔥</div>
+                                    <div class="symbol">💯</div>
+                                    <div class="symbol">❌</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slot-wrapper">
+                            <div class="slot" id="slot2">
+                                <div class="reel">
+                                    <div class="symbol">✏️</div>
+                                    <div class="symbol">🧠</div>
+                                    <div class="symbol">🎓</div>
+                                    <div class="symbol">🔥</div>
+                                    <div class="symbol">💯</div>
+                                    <div class="symbol">❌</div>
+                                    <div class="symbol">📚</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slot-wrapper">
+                            <div class="slot" id="slot3">
+                                <div class="reel">
+                                    <div class="symbol">🧠</div>
+                                    <div class="symbol">🎓</div>
+                                    <div class="symbol">🔥</div>
+                                    <div class="symbol">💯</div>
+                                    <div class="symbol">❌</div>
+                                    <div class="symbol">📚</div>
+                                    <div class="symbol">✏️</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="win-message" id="win-message"></div>
+
+                    <div class="bet-section">
+                        <h3>Выберите ставку</h3>
+                        <div class="bet-buttons">
+                            <button
+                                class="bet-btn active"
+                                data-bet="10"
+                                onclick="selectBet(10)">
+                                <span class="bet-amount">10</span>
+                                <span class="bet-label">баллов</span>
+                            </button>
+                            <button
+                                class="bet-btn"
+                                data-bet="50"
+                                onclick="selectBet(50)">
+                                <span class="bet-amount">50</span>
+                                <span class="bet-label">баллов</span>
+                            </button>
+                            <button
+                                class="bet-btn"
+                                data-bet="100"
+                                onclick="selectBet(100)">
+                                <span class="bet-amount">100</span>
+                                <span class="bet-label">баллов</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="spin-btn" id="spin-btn" onclick="spin()">
+                        <span class="spin-text">КРУТИТЬ</span>
+                        <span class="spin-cost">Стоимость: 10 баллов</span>
+                    </button>
+                </div>
+
+                <div class="payout-table">
+                    <h3>Таблица выигрышей</h3>
+                    <div class="payout-grid">
+                        <div class="payout-item">
+                            <span>💯 💯 💯</span>
+                            <span class="multiplier">x100</span>
+                        </div>
+                        <div class="payout-item">
+                            <span>🎓 🎓 🎓</span>
+                            <span class="multiplier">x50</span>
+                        </div>
+                        <div class="payout-item">
+                            <span>🔥 🔥 🔥</span>
+                            <span class="multiplier">x25</span>
+                        </div>
+                        <div class="payout-item">
+                            <span>🧠 🧠 🧠</span>
+                            <span class="multiplier">x15</span>
+                        </div>
+                        <div class="payout-item">
+                            <span>📚 📚 📚</span>
+                            <span class="multiplier">x10</span>
+                        </div>
+                        <div class="payout-item">
+                            <span>✏️ ✏️ ✏️</span>
+                            <span class="multiplier">x8</span>
+                        </div>
+                        <div class="payout-item">
+                            <span>❌ ❌ ❌</span>
+                            <span class="multiplier">x0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="leaderboard-screen" class="screen">
+            <div class="leaderboard-container">
+                <button class="back-btn" onclick="backToGame()">
+                    ← Назад к игре
+                </button>
+                <h1>🏆 Рейтинг лучших 🏆</h1>
+
+                <div class="leaderboard-table">
+                    <div class="leaderboard-header">
+                        <span>Место</span>
+                        <span>Студент</span>
+                        <span>Баллы</span>
+                    </div>
+                    <div class="leaderboard-row rank-1">
+                        <span class="rank">🥇 1</span>
+                        <span class="player">Юзер</span>
+                        <span class="score">15 750</span>
+                    </div>
+                    <div class="leaderboard-row rank-2">
+                        <span class="rank">🥈 2</span>
+                        <span class="player">Юзер</span>
+                        <span class="score">12 340</span>
+                    </div>
+                    <div class="leaderboard-row rank-3">
+                        <span class="rank">🥉 3</span>
+                        <span class="player">Юзер</span>
+                        <span class="score">9 880</span>
+                    </div>
+                    <div class="leaderboard-row">
+                        <span class="rank">4</span>
+                        <span class="player">Юзер</span>
+                        <span class="score">7 230</span>
+                    </div>
+                    <div class="leaderboard-row">
+                        <span class="rank">5</span>
+                        <span class="player">Юзер</span>
+                        <span class="score">6 450</span>
+                    </div>
+                    <div class="leaderboard-row">
+                        <span class="rank">6</span>
+                        <span class="player">Юзер</span>
+                        <span class="score">5 120</span>
+                    </div>
+                    <div class="leaderboard-row">
+                        <span class="rank">7</span>
+                        <span class="player">Юзер</span>
+                        <span class="score">4 890</span>
+                    </div>
+                    <div class="leaderboard-row">
+                        <span class="rank">8</span>
+                        <span class="player">Юзер</span>
+                        <span class="score">3 670</span>
+                    </div>
+                    <div class="leaderboard-row">
+                        <span class="rank">9</span>
+                        <span class="player">Юзер</span>
+                        <span class="score">2 340</span>
+                    </div>
+                    <div class="leaderboard-row highlight">
+                        <span class="rank">10</span>
+                        <span class="player">Студент123 (Вы)</span>
+                        <span class="score">1 000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
+
+<script>
+    let currentBet = 10
+    let isSpinning = false
+
+    function showLogin() {
+        document
+            .querySelectorAll('.tab-btn')
+            .forEach((btn) => btn.classList.remove('active'))
+        document
+            .querySelectorAll('.auth-form')
+            .forEach((form) => form.classList.remove('active'))
+        event.target.classList.add('active')
+        document.getElementById('login-form').classList.add('active')
+    }
+
+    function showSignup() {
+        document
+            .querySelectorAll('.tab-btn')
+            .forEach((btn) => btn.classList.remove('active'))
+        document
+            .querySelectorAll('.auth-form')
+            .forEach((form) => form.classList.remove('active'))
+        event.target.classList.add('active')
+        document.getElementById('signup-form').classList.add('active')
+    }
+
+    document
+        .getElementById('login-form')
+        .addEventListener('submit', function (e) {
+            e.preventDefault()
+            document.getElementById('auth-screen').classList.remove('active')
+            document.getElementById('game-screen').classList.add('active')
+        })
+
+    document
+        .getElementById('signup-form')
+        .addEventListener('submit', function (e) {
+            e.preventDefault()
+            document.getElementById('auth-screen').classList.remove('active')
+            document.getElementById('game-screen').classList.add('active')
+        })
+
+    function selectBet(amount) {
+        currentBet = amount
+        document
+            .querySelectorAll('.bet-btn')
+            .forEach((btn) => btn.classList.remove('active'))
+        event.target.closest('.bet-btn').classList.add('active')
+        document.querySelector('.spin-cost').textContent =
+            `Стоимость: ${amount} баллов`
+    }
+
+    function spin() {
+        if (isSpinning) return
+
+        isSpinning = true
+        const spinBtn = document.getElementById('spin-btn')
+        spinBtn.disabled = true
+
+        const winMessage = document.getElementById('win-message')
+        winMessage.textContent = ''
+
+        const reels = document.querySelectorAll('.reel')
+        reels.forEach((reel) => {
+            reel.classList.add('spinning')
+        })
+
+        setTimeout(() => {
+            reels.forEach((reel) => {
+                reel.classList.remove('spinning')
+                const randomPos = Math.floor(Math.random() * 7) * -100
+                reel.style.top = randomPos + 'px'
+            })
+
+            const isWin = Math.random() > 0.7
+            if (isWin) {
+                const winAmount =
+                    currentBet * (Math.floor(Math.random() * 10) + 2)
+                winMessage.textContent = `🎉 ПОЗДРАВЛЯЕМ! Вы получили ${winAmount} баллов! 🎉`
+            } else {
+                winMessage.textContent = '[ПРИДУМАЙТЕ ФРАЗУ ПРОИГРЫША]'
+            }
+
+            isSpinning = false
+            spinBtn.disabled = false
+        }, 2000)
+    }
+
+    function showLeaderboard() {
+        document.getElementById('game-screen').classList.remove('active')
+        document.getElementById('leaderboard-screen').classList.add('active')
+    }
+
+    function backToGame() {
+        document.getElementById('leaderboard-screen').classList.remove('active')
+        document.getElementById('game-screen').classList.add('active')
+    }
+
+    function logout() {
+        document.getElementById('game-screen').classList.remove('active')
+        document.getElementById('auth-screen').classList.add('active')
+    }
+</script>
